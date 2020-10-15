@@ -8,26 +8,26 @@ import (
 
 // Handle the /start command here
 func (a *application) startHandler(m *tbot.Message) {
-	msg := "This is a bot whose sole purpose is to play rock, paper, scissors with you.\nCommands:\n1. Use /play to play.\n2. Use /score to view current scores.\n3. Use /reset to reset scores."
+	msg := "Bu bot siz bilan tosh, qaychi, qog'oz o'yinini o'ynaydi.\n Buyruqlar: \n 1.o'ynash uchun /play ni bosing. \n 2.umumiy natijani bilish uchun /score ni bosing.\n 3. Natijani bekor qilish uchun /reset ni bosing."
 	a.client.SendMessage(m.Chat.ID, msg)
 }
 
 // Handle the /play command here
 func (a *application) playHandler(m *tbot.Message) {
 	buttons := makeButtons()
-	a.client.SendMessage(m.Chat.ID, "Pick an option:", tbot.OptInlineKeyboardMarkup(buttons))
+	a.client.SendMessage(m.Chat.ID, "Siz tanlang:", tbot.OptInlineKeyboardMarkup(buttons))
 }
 
 // Handle the /score command here
 func (a *application) scoreHandler(m *tbot.Message) {
-	msg := fmt.Sprintf("Scores:\nWins: %v\nDraws: %v\nLosses: %v", a.wins, a.draws, a.losses)
+	msg := fmt.Sprintf("Natijangiz:\n Yutishlar: %v\n Tengliklar: %v\n Yutkazishlar: %v \n Buyruqlar: \n 1.o'ynash uchun /play ni bosing. \n 2.umumiy natijani bilish uchun /score ni bosing.\n 3. Natijani bekor qilish uchun /reset ni bosing.", a.wins, a.draws, a.losses)
 	a.client.SendMessage(m.Chat.ID, msg)
 }
 
 // Handle the /reset command here
 func (a *application) resetHandler(m *tbot.Message) {
 	a.wins, a.draws, a.losses = 0, 0, 0
-	msg := "Scores have been reset to 0."
+	msg := "Umumiy natija 0 ga tenglandi. \n Buyruqlar: \n 1.o'ynash uchun /play ni bosing. \n 2.umumiy natijani bilish uchun /score ni bosing.\n 3. Natijani bekor qilish uchun /reset ni bosing."
 	a.client.SendMessage(m.Chat.ID, msg)
 }
 

@@ -17,15 +17,15 @@ func init() {
 func makeButtons() *tbot.InlineKeyboardMarkup {
 	// Create butttons with visible Text and CallbackData as a value.
 	btnRock := tbot.InlineKeyboardButton{
-		Text:         "Rock",
+		Text:         "tosh",
 		CallbackData: "rock",
 	}
 	btnPaper := tbot.InlineKeyboardButton{
-		Text:         "Paper",
+		Text:         "qog'oz",
 		CallbackData: "paper",
 	}
 	btnScissors := tbot.InlineKeyboardButton{
-		Text:         "Scissors",
+		Text:         "qaychi",
 		CallbackData: "scissors",
 	}
 	return &tbot.InlineKeyboardMarkup{
@@ -42,15 +42,35 @@ func (a *application) draw(humanMove string) (msg string) {
 	// Determine the outcome
 	switch humanMove {
 	case botMove:
-		result = "drew"
+		result = "ham yutmadingiz, men ham yutmadim"
 		a.draws++
 	case options[botMove]:
-		result = "lost"
+		result = "yutkazdingiz"
 		a.losses++
 	default:
-		result = "won"
+		result = "yutdingiz"
 		a.wins++
 	}
-	msg = fmt.Sprintf("You %s! You chose %s and I chose %s.", result, humanMove, botMove)
+	var humanMoved string
+	var botMoved string
+	switch humanMove {
+	case "rock":
+		humanMoved = "tosh"
+	case "paper":
+		humanMoved = "qo'goz"
+	default:
+		humanMoved = "qaychi"
+	}
+
+	switch botMove {
+	case "rock":
+		botMoved = "tosh"
+	case "paper":
+		botMoved = "qo'goz"
+	default:
+		botMoved = "qaychi"
+	}
+	msg = fmt.Sprintf("Siz %s ! Siz %s ni tanladingiz va men %s ni tanladim. \n Buyruqlar: \n 1.o'ynash uchun /play ni bosing. \n 2.umumiy natijani bilish uchun /score ni bosing.\n 3. Natijani bekor qilish uchun /reset ni bosing.", result, humanMoved, botMoved)
+	bot.HandleMessage("/start", app.startHandler)
 	return
 }
