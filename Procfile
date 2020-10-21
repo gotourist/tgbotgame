@@ -1,1 +1,1 @@
-web: bin/tgbotgmae
+web: bin/tgbotgame
